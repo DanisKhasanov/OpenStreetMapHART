@@ -8,8 +8,8 @@ import { Vector as VectorSource } from 'ol/source';
 import { GeoJSON } from 'ol/format';
 import { Style, Fill, Stroke, Circle as CircleStyle } from 'ol/style';
 import { MapProps } from '../types/geo';
+import { APP_CONFIG } from '../utils/constants';
 import styles from '../styles/Map.module.css';
-// import 'ol/ol.css';
 
 const Map: React.FC<MapProps> = ({ onFeatureClick, uploadedFeatures }) => {
   const mapRef = useRef<HTMLDivElement>(null);
@@ -17,7 +17,7 @@ const Map: React.FC<MapProps> = ({ onFeatureClick, uploadedFeatures }) => {
 
   useEffect(() => {
     // Координаты центра Душанбе
-    const dushanbeCenter = fromLonLat([68.7870, 38.5358]);
+    const dushanbeCenter = fromLonLat(APP_CONFIG.MAP_CENTER);
 
     // Создание карты
     const newMap = new OlMap({
@@ -30,12 +30,12 @@ const Map: React.FC<MapProps> = ({ onFeatureClick, uploadedFeatures }) => {
       ],
       view: new View({
         center: dushanbeCenter,
-        zoom: 11,
+        zoom: APP_CONFIG.DEFAULT_ZOOM,
       }),
     });
 
     setMap(newMap);
-    
+
 
     return () => {
       if (newMap) {

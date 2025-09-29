@@ -3,6 +3,7 @@ import JSZip from "jszip";
 import { KML, GeoJSON } from "ol/format";
 import { FileUploadProps, GeoData } from "../types/geo";
 import { useCustomSnackbar } from "../hooks/useCustomSnackbar";
+import { APP_CONFIG } from "../utils/constants";
 import styles from "../styles/FileUpload.module.css";
 
 const FileUpload: React.FC<FileUploadProps> = ({ onFileUpload }) => {
@@ -80,8 +81,6 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileUpload }) => {
           { variant: "success" }
         );
       } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error("Ошибка при парсинге файла:", error);
         showSnackbar(
           `Ошибка при чтении файла: ${
             error instanceof Error ? error.message : "Неизвестная ошибка"
@@ -133,7 +132,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileUpload }) => {
     }
   };
 
-  // Парсер KML с использованием встроенного парсера OpenLayers
+  // Парсер KML 
   const parseKMLWithOpenLayers = (kmlContent: string): GeoData => {
     try {
       const kmlFormat = new KML();
@@ -147,7 +146,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileUpload }) => {
       const geoJsonFeatures = features.map((feature) => {
         const properties = feature.getProperties();
 
-        // Удаляем служебные свойства OpenLayers, но сохраняем color
+        // Удаляем служебные свойства OpenLayers
         const cleanProperties: Record<string, any> = {};
         Object.entries(properties).forEach(([key, value]) => {
           if (
@@ -204,7 +203,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileUpload }) => {
       <input
         ref={fileInputRef}
         type="file"
-        accept=".json,.geojson,.kml,.kmz"
+        accept={APP_CONFIG.SUPPORTED_FORMATS.join(',')}
         onChange={handleFileChange}
         className={styles.fileInput}
       />
