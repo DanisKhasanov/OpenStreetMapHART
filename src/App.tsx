@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
-import { SnackbarProvider } from 'notistack';
-import Map from './components/Map';
-import FileUpload from './components/FileUpload';
-import FeatureModal from './components/FeatureModal';
-import { GeoData } from './types/geo';
-import './styles/App.css';
+import { useState } from "react";
+import { SnackbarProvider } from "notistack";
+import Map from "./components/Map";
+import FileUpload from "./components/FileUpload";
+import FeatureModal from "./components/FeatureModal";
+import { GeoData } from "./types/geo";
+import "./styles/App.css";
 
-const App: React.FC = () => {
+const App = () => {
   const [uploadedFeatures, setUploadedFeatures] = useState<GeoData[]>([]);
-  const [selectedFeature, setSelectedFeature] = useState<Record<string, any> | null>(null);
+  const [selectedFeature, setSelectedFeature] = useState<Record<
+    string,
+    any
+  > | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleFileUpload = (geoData: GeoData) => {
@@ -29,9 +32,9 @@ const App: React.FC = () => {
     <SnackbarProvider maxSnack={3}>
       <div>
         <FileUpload onFileUpload={handleFileUpload} />
-        <Map 
-          onFeatureClick={handleFeatureClick} 
-          uploadedFeatures={uploadedFeatures} 
+        <Map
+          onFeatureClick={handleFeatureClick}
+          uploadedFeatures={uploadedFeatures}
         />
         <FeatureModal
           isOpen={isModalOpen}

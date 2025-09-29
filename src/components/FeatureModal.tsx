@@ -1,21 +1,12 @@
-import React from 'react';
 import { FeatureModalProps } from '../types/geo';
+import { OPENLAYERS_PROPS } from '../utils/constants';
 import styles from '../styles/FeatureModal.module.css';
 
-const FeatureModal: React.FC<FeatureModalProps> = ({ isOpen, onClose, featureData }) => {
+const FeatureModal = ({ isOpen, onClose, featureData }: FeatureModalProps) => {
   if (!isOpen || !featureData) return null;
 
   // Фильтруем свойства OpenLayers и другие служебные поля
   const isUserProperty = (key: string, value: any): boolean => {
-    // Исключаем внутренние свойства OpenLayers
-    const openLayersProps = [
-      'geometry', 'disposed', 'eventTarget_', 'pendingRemovals_', 'dispatching_',
-      'listeners_', 'revision_', 'ol_uid', 'values_', 'extent_', 'extentRevision_',
-      'simplifiedGeometryMaxMinSquaredTolerance', 'simplifiedGeometryRevision',
-      'simplifyTransformedInternal', 'layout', 'stride', 'flatCoordinates',
-      'on', 'once', 'un', 'get', 'set', 'getKeys', 'getValues', 'forEach'
-    ];
-    
     // Исключаем функции и сложные объекты
     if (typeof value === 'function') return false;
     if (value && typeof value === 'object' && !Array.isArray(value)) {
@@ -23,7 +14,7 @@ const FeatureModal: React.FC<FeatureModalProps> = ({ isOpen, onClose, featureDat
       if (value.ol_uid || value.disposed !== undefined) return false;
     }
     
-    return !openLayersProps.includes(key);
+    return !(OPENLAYERS_PROPS as readonly string[]).includes(key);
   };
 
   const renderProperties = (obj: Record<string, any>, prefix = ''): React.ReactNode[] => {

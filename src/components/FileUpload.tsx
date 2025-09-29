@@ -1,12 +1,13 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import JSZip from "jszip";
 import { KML, GeoJSON } from "ol/format";
 import { FileUploadProps, GeoData } from "../types/geo";
 import { useCustomSnackbar } from "../hooks/useCustomSnackbar";
-import { APP_CONFIG } from "../utils/constants";
+import { APP_CONFIG, FILE_VALIDATION_RULES } from "../utils/constants";
+import { validateGeoData, isSupportedFormat, getErrorMessage } from "../utils/validationUtils";
 import styles from "../styles/FileUpload.module.css";
 
-const FileUpload: React.FC<FileUploadProps> = ({ onFileUpload }) => {
+const FileUpload = ({ onFileUpload }: FileUploadProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { showSnackbar } = useCustomSnackbar();
   const [isDragOver, setIsDragOver] = useState(false);
@@ -42,39 +43,32 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileUpload }) => {
         const content = e.target?.result as string;
         let geoData: GeoData;
 
+        // Проверяем поддерживаемый формат
+        if (!isSupportedFormat(file.name)) {
+          showSnackbar(FILE_VALIDATION_RULES.ERROR_MESSAGES.UNSUPPORTED_FORMAT, { variant: "error" });
+          return;
+        }
+
         // Определяем тип файла и парсим соответственно
         if (file.name.endsWith(".json") || file.name.endsWith(".geojson")) {
           geoData = JSON.parse(content);
         } else if (file.name.endsWith(".kml")) {
-          // Для KML файлов используем встроенный парсер OpenLayers
           geoData = parseKMLWithOpenLayers(content);
         } else if (file.name.endsWith(".kmz")) {
-          // KMZ файлы - это сжатые KML файлы
           geoData = await parseKMZ(file);
         } else {
-          showSnackbar("Неподдерживаемый формат файла", { variant: "error" });
-          return;
+          throw new Error(FILE_VALIDATION_RULES.ERROR_MESSAGES.UNSUPPORTED_FORMAT);
         }
 
         // Валидация GeoJSON структуры
-        if (!geoData || !geoData.type) {
-          throw new Error("Неверная структура GeoJSON файла");
-        }
-
-        if (geoData.type === "FeatureCollection" && !geoData.features) {
-          throw new Error("FeatureCollection должен содержать массив features");
-        }
-
-        if (geoData.type === "Feature" && !geoData.geometry) {
-          throw new Error("Feature должен содержать geometry");
-        }
+        validateGeoData(geoData);
 
         onFileUpload(geoData);
 
         // Показываем успешное уведомление
         const featureCount =
           geoData.type === "FeatureCollection"
-            ? geoData.features?.length || 0
+            ? (geoData as any).features?.length || 0
             : 1;
         showSnackbar(
           `Файл успешно загружен! Найдено объектов: ${featureCount}`,
@@ -118,17 +112,13 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileUpload }) => {
       }
 
       if (!kmlFile) {
-        throw new Error("KML файл не найден в KMZ архиве");
+        throw new Error(FILE_VALIDATION_RULES.ERROR_MESSAGES.KML_NOT_FOUND);
       }
 
       const kmlContent = await kmlFile.async("text");
       return parseKMLWithOpenLayers(kmlContent);
     } catch (error) {
-      throw new Error(
-        `Ошибка при распаковке KMZ файла: ${
-          error instanceof Error ? error.message : "Неизвестная ошибка"
-        }`
-      );
+      throw new Error(getErrorMessage(FILE_VALIDATION_RULES.ERROR_MESSAGES.KMZ_EXTRACT_ERROR, error));
     }
   };
 
@@ -183,11 +173,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileUpload }) => {
         features: geoJsonFeatures,
       };
     } catch (error) {
-      throw new Error(
-        `Ошибка при парсинге KML файла: ${
-          error instanceof Error ? error.message : "Неизвестная ошибка"
-        }`
-      );
+      throw new Error(getErrorMessage(FILE_VALIDATION_RULES.ERROR_MESSAGES.KML_PARSE_ERROR, error));
     }
   };
 
