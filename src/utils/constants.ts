@@ -4,5 +4,6 @@ export const APP_CONFIG = {
   DEFAULT_ZOOM: 12,
   SUPPORTED_FORMATS: ['.json', '.geojson', '.kml', '.kmz'],
   MAX_FILE_SIZE: 10 * 1024 * 1024, // 10MB
+  DEFAULT_COLOR: '#667eea',
 } as const;
 
