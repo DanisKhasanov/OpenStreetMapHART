@@ -1,0 +1,74 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Центр Душанбе",
+        "type": "Точка",
+        "description": "Главная площадь города",
+        "population": 1000000
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [68.7870, 38.5358]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Парк Рудаки",
+        "type": "Полигон",
+        "description": "Центральный парк города",
+        "area": "15 га"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [68.7800, 38.5300],
+          [68.7900, 38.5300],
+          [68.7900, 38.5400],
+          [68.7800, 38.5400],
+          [68.7800, 38.5300]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Проспект Рудаки",
+        "type": "Линия",
+        "description": "Главная улица города",
+        "length": "5 км"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [68.7700, 38.5358],
+          [68.7800, 38.5358],
+          [68.7900, 38.5358],
+          [68.8000, 38.5358]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Районы Душанбе",
+        "type": "Множественные точки",
+        "description": "Административные районы",
+        "count": 4
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [68.7500, 38.5200],
+          [68.8200, 38.5200],
+          [68.7500, 38.5500],
+          [68.8200, 38.5500]
+        ]
+      }
+    }
+  ]
+}
+

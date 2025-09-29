@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Транспортная инфраструктура Душанбе</name>
+    <description>Объекты транспортной инфраструктуры города</description>
+    
+    <Placemark>
+      <name>Автобусная остановка "Центр"</name>
+      <description>Главная автобусная остановка в центре города</description>
+      <Point>
+        <coordinates>68.7870,38.5358,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Такси-стоянка</name>
+      <description>Место стоянки такси рядом с площадью</description>
+      <Point>
+        <coordinates>68.7850,38.5340,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Маршрут автобуса №1</name>
+      <description>Основной маршрут общественного транспорта</description>
+      <LineString>
+        <coordinates>
+          68.7500,38.5300,0
+          68.7600,38.5350,0
+          68.7700,38.5380,0
+          68.7800,38.5400,0
+          68.7900,38.5420,0
+          68.8000,38.5450,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+    
+    <Placemark>
+      <name>Зона парковки</name>
+      <description>Центральная парковка для автомобилей</description>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>
+              68.7820,38.5320,0
+              68.7880,38.5320,0
+              68.7880,38.5360,0
+              68.7820,38.5360,0
+              68.7820,38.5320,0
+            </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+  </Document>
+</kml>
+

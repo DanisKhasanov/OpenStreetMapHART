@@ -1,0 +1,67 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Аэропорт Душанбе",
+        "type": "Аэропорт",
+        "code": "DYU",
+        "runways": 2,
+        "capacity": "1.5 млн пассажиров/год"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [68.8250, 38.5450]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Железнодорожный вокзал",
+        "type": "Вокзал",
+        "platforms": 4,
+        "daily_trains": 12
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [68.7500, 38.5300]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Автобусный терминал",
+        "type": "Автовокзал",
+        "routes": 25,
+        "daily_passengers": 5000
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [68.7800, 38.5200]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Кольцевая дорога",
+        "type": "Дорога",
+        "length": "45 км",
+        "lanes": 4
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [68.7000, 38.5000],
+          [68.8000, 38.5000],
+          [68.9000, 38.5000],
+          [68.9000, 38.6000],
+          [68.8000, 38.6000],
+          [68.7000, 38.6000],
+          [68.7000, 38.5000]
+        ]
+      }
+    }
+  ]
+}
+

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Достопримечательности Душанбе</name>
+    <description>Основные туристические объекты города</description>
+    
+    <Placemark>
+      <name>Дворец нации</name>
+      <description>Официальная резиденция президента Таджикистана. Построен в 2014 году.</description>
+      <Point>
+        <coordinates>68.7870,38.5358,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Парк Рудаки</name>
+      <description>Центральный парк города с фонтанами и аллеями</description>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>
+              68.7800,38.5300,0
+              68.7900,38.5300,0
+              68.7900,38.5400,0
+              68.7800,38.5400,0
+              68.7800,38.5300,0
+            </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    
+    <Placemark>
+      <name>Проспект Рудаки</name>
+      <description>Главная улица города протяженностью 5 километров</description>
+      <LineString>
+        <coordinates>
+          68.7700,38.5358,0
+          68.7800,38.5358,0
+          68.7900,38.5358,0
+          68.8000,38.5358,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+    
+    <Placemark>
+      <name>Мечеть Ходжа Якуб</name>
+      <description>Одна из крупнейших мечетей в Центральной Азии</description>
+      <Point>
+        <coordinates>68.7790,38.5390,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Национальный музей</name>
+      <description>Главный музей страны с богатой коллекцией артефактов</description>
+      <Point>
+        <coordinates>68.7850,38.5320,0</coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>
+

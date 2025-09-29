@@ -1,0 +1,62 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1,
+        "name": "Мечеть Ходжа Якуб",
+        "category": "Религиозное здание",
+        "year": 1994,
+        "capacity": 3000
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [68.7790, 38.5390]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2,
+        "name": "Национальный музей Таджикистана",
+        "category": "Музей",
+        "year": 1934,
+        "exhibits": 50000
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [68.7850, 38.5320]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3,
+        "name": "Памятник Исмаилу Сомони",
+        "category": "Памятник",
+        "year": 1999,
+        "height": "25 метров"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [68.7870, 38.5358]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 4,
+        "name": "Театр оперы и балета",
+        "category": "Театр",
+        "year": 1946,
+        "seats": 1000
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [68.7900, 38.5380]
+      }
+    }
+  ]
+}
+
