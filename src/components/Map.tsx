@@ -1,18 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Map as OlMap, View } from "ol";
-import { Tile as TileLayer } from "ol/layer";
-import { OSM } from "ol/source";
-import { fromLonLat } from "ol/proj";
-import { defaults as defaultControls } from "ol/control";
-import { MapProps } from "../types/geo";
-import { APP_CONFIG } from "../utils/constants";
+import React, { useEffect, useRef, useState } from 'react';
+import { Map as OlMap, View } from 'ol';
+import { Tile as TileLayer } from 'ol/layer';
+import { OSM } from 'ol/source';
+import { fromLonLat } from 'ol/proj';
+import { defaults as defaultControls } from 'ol/control';
+import { MapProps } from '../types/geo';
+import { APP_CONFIG } from '../utils/constants';
 import {
   processGeoData,
   removeDataLayers,
   createVectorLayer,
-} from "../utils/mapUtils";
-import { handleFeatureClick, handlePointerMove } from "../utils/eventUtils";
-import styles from "../styles/Map.module.css";
+} from '../utils/mapUtils';
+import { handleFeatureClick, handlePointerMove } from '../utils/eventUtils';
+import styles from '../styles/Map.module.css';
 
 const Map = ({ onFeatureClick, uploadedFeatures }: MapProps) => {
   const mapRef = useRef<HTMLDivElement>(null);
@@ -99,10 +99,10 @@ const Map = ({ onFeatureClick, uploadedFeatures }: MapProps) => {
       map.addLayer(vectorLayer);
 
       // Добавляем обработчики событий
-      map.on("click", (event: any) =>
+      map.on('click', (event: any) =>
         handleFeatureClick(event, map, onFeatureClick)
       );
-      map.on("pointermove", (event: any) =>
+      map.on('pointermove', (event: any) =>
         handlePointerMove(event, map, hoveredFeatureRef)
       );
     }
@@ -118,10 +118,10 @@ const Map = ({ onFeatureClick, uploadedFeatures }: MapProps) => {
         setCurrentZoom(Math.round(zoom));
       };
 
-      view.on("change:resolution", handleZoomChange);
+      view.on('change:resolution', handleZoomChange);
 
       return () => {
-        view.un("change:resolution", handleZoomChange);
+        view.un('change:resolution', handleZoomChange);
       };
     }
   }, [map]);
@@ -134,13 +134,13 @@ const Map = ({ onFeatureClick, uploadedFeatures }: MapProps) => {
           <button
             className={`${styles.zoomButton} ${styles.zoomInIcon}`}
             onClick={handleZoomIn}
-            title="Увеличить масштаб"
+            title='Увеличить масштаб'
             disabled={currentZoom >= 18}
           />
           <button
             className={`${styles.zoomButton} ${styles.zoomOutIcon}`}
             onClick={handleZoomOut}
-            title="Уменьшить масштаб"
+            title='Уменьшить масштаб'
             disabled={currentZoom <= 1}
           />
         </div>
@@ -148,7 +148,7 @@ const Map = ({ onFeatureClick, uploadedFeatures }: MapProps) => {
           <button
             className={`${styles.zoomButton} ${styles.resetZoomButton} ${styles.resetZoomIcon}`}
             onClick={handleResetZoom}
-            title="Сбросить масштаб"
+            title='Сбросить масштаб'
           />
         </div>
       </div>

@@ -62,19 +62,19 @@
 
 /* Стили для иконок кнопок */
 .zoomInIcon::before {
-  content: "+";
+  content: '+';
   font-size: 20px;
   line-height: 1;
 }
 
 .zoomOutIcon::before {
-  content: "−";
+  content: '−';
   font-size: 20px;
   line-height: 1;
 }
 
 .resetZoomIcon::before {
-  content: "⌂";
+  content: '⌂';
   font-size: 16px;
   line-height: 1;
 }
@@ -109,7 +109,7 @@
 }
 
 .zoomControlsGroup + .zoomControlsGroup::before {
-  content: "";
+  content: '';
   position: absolute;
   top: -5px;
   left: 50%;

@@ -1,17 +1,23 @@
-import { FeatureModalProps } from "../types/geo";
-import { OPENLAYERS_PROPS } from "../utils/constants";
-import styles from "../styles/FeatureModal.module.css";
+import { FeatureModalProps } from '../types/geo';
+import { OPENLAYERS_PROPS } from '../utils/constants';
+import styles from '../styles/FeatureModal.module.css';
 
 const FeatureModal = ({ isOpen, onClose, featureData }: FeatureModalProps) => {
-  if (!isOpen || !featureData) return null;
+  if (!isOpen || !featureData) {
+    return null;
+  }
 
   // Фильтруем свойства OpenLayers и другие служебные поля
   const isUserProperty = (key: string, value: any): boolean => {
     // Исключаем функции и сложные объекты
-    if (typeof value === "function") return false;
-    if (value && typeof value === "object" && !Array.isArray(value)) {
+    if (typeof value === 'function') {
+      return false;
+    }
+    if (value && typeof value === 'object' && !Array.isArray(value)) {
       // Проверяем, не является ли это OpenLayers объектом
-      if (value.ol_uid || value.disposed !== undefined) return false;
+      if (value.ol_uid || value.disposed !== undefined) {
+        return false;
+      }
     }
 
     return !(OPENLAYERS_PROPS as readonly string[]).includes(key);
@@ -20,14 +26,14 @@ const FeatureModal = ({ isOpen, onClose, featureData }: FeatureModalProps) => {
   //Рекурсивно отображаем свойства объекта в виде элементов.
   const renderProperties = (
     obj: Record<string, any>,
-    prefix = ""
+    prefix = ''
   ): React.ReactNode[] => {
     return Object.entries(obj)
       .filter(([key, value]) => isUserProperty(key, value))
       .map(([key, value]) => {
         const fullKey = prefix ? `${prefix}.${key}` : key;
 
-        if (value && typeof value === "object" && !Array.isArray(value)) {
+        if (value && typeof value === 'object' && !Array.isArray(value)) {
           // Рекурсивно обрабатываем только если это не OpenLayers объект
           if (!value.ol_uid && !value.disposed) {
             return (
@@ -43,11 +49,11 @@ const FeatureModal = ({ isOpen, onClose, featureData }: FeatureModalProps) => {
           <div
             key={fullKey}
             className={`${styles.propertyItem} ${
-              prefix ? styles.propertyItemNested : ""
+              prefix ? styles.propertyItemNested : ''
             }`}
           >
             <strong className={styles.propertyKey}>{fullKey}:</strong>
-            {key === "color" ? (
+            {key === 'color' ? (
               <div className={styles.colorDisplay}>
                 <div
                   className={styles.colorSquare}

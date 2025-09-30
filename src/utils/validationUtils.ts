@@ -7,11 +7,11 @@ export const validateGeoData = (geoData: GeoData): void => {
     throw new Error(FILE_VALIDATION_RULES.ERROR_MESSAGES.INVALID_STRUCTURE);
   }
 
-  if (geoData.type === "FeatureCollection" && !geoData.features) {
+  if (geoData.type === 'FeatureCollection' && !geoData.features) {
     throw new Error(FILE_VALIDATION_RULES.ERROR_MESSAGES.MISSING_FEATURES);
   }
 
-  if (geoData.type === "Feature" && !geoData.geometry) {
+  if (geoData.type === 'Feature' && !geoData.geometry) {
     throw new Error(FILE_VALIDATION_RULES.ERROR_MESSAGES.MISSING_GEOMETRY);
   }
 };
@@ -23,6 +23,9 @@ export const isSupportedFormat = (filename: string): boolean => {
 };
 
 // Получение сообщения об ошибке с контекстом
-export const getErrorMessage = (baseMessage: string, error: unknown): string => {
-  return `${baseMessage}: ${error instanceof Error ? error.message : "Неизвестная ошибка"}`;
+export const getErrorMessage = (
+  baseMessage: string,
+  error: unknown
+): string => {
+  return `${baseMessage}: ${error instanceof Error ? error.message : 'Неизвестная ошибка'}`;
 };

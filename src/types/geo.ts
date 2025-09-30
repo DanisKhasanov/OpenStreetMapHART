@@ -2,7 +2,13 @@ export interface GeoJSONFeature {
   type: 'Feature';
   properties: Record<string, any>;
   geometry: {
-    type: 'Point' | 'LineString' | 'Polygon' | 'MultiPoint' | 'MultiLineString' | 'MultiPolygon';
+    type:
+      | 'Point'
+      | 'LineString'
+      | 'Polygon'
+      | 'MultiPoint'
+      | 'MultiLineString'
+      | 'MultiPolygon';
     coordinates: number[] | number[][] | number[][][];
   };
 }
@@ -28,4 +34,3 @@ export interface FeatureModalProps {
   onClose: () => void;
   featureData: Record<string, any> | null;
 }
-

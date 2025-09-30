@@ -22,19 +22,12 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && gh-pages -d build"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "rules": {
-      "no-unused-vars": "warn",
-      "no-console": "warn",
-      "prefer-const": "error",
-      "no-var": "error"
-    }
+    "deploy": "npm run build && gh-pages -d build",
+    "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
+    "lint:fix": "eslint src --ext .ts,.tsx,.js,.jsx --fix",
+    "lint:check": "eslint src --ext .ts,.tsx,.js,.jsx --max-warnings 0",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css,md}\""
   },
   "browserslist": {
     "production": [
@@ -54,7 +47,16 @@
     "@types/node": "^24.5.2",
     "@types/react": "^19.1.14",
     "@types/react-dom": "^19.1.9",
+    "@typescript-eslint/eslint-plugin": "^8.45.0",
+    "@typescript-eslint/parser": "^8.45.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "gh-pages": "^6.3.0",
+    "prettier": "^3.6.2",
     "typescript": "^5.9.2"
   }
 }

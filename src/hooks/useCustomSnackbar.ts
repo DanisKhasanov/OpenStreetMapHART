@@ -1,4 +1,4 @@
-import { useSnackbar, OptionsObject, SnackbarMessage } from "notistack";
+import { useSnackbar, OptionsObject, SnackbarMessage } from 'notistack';
 
 const useCustomSnackbar = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -6,8 +6,8 @@ const useCustomSnackbar = () => {
   const showSnackbar = (message: SnackbarMessage, options?: OptionsObject) => {
     enqueueSnackbar(message, {
       anchorOrigin: {
-        vertical: "bottom",
-        horizontal: "right",
+        vertical: 'bottom',
+        horizontal: 'right',
       },
       autoHideDuration: 2000,
       ...options,

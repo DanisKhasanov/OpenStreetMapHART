@@ -1,14 +1,22 @@
-import { Style, Fill, Stroke, Circle as CircleStyle, RegularShape } from 'ol/style';
+import {
+  Style,
+  Fill,
+  Stroke,
+  Circle as CircleStyle,
+  RegularShape,
+} from 'ol/style';
 import { APP_CONFIG } from './constants';
 
 // Утилиты для работы с цветами
 export const isWhiteOrLight = (color: string): boolean => {
-  return color === '#ffffff' || 
-         color === '#fff' || 
-         color === 'white' ||
-         color.toLowerCase() === '#ffffff' ||
-         color.toLowerCase() === '#fff' ||
-         color.toLowerCase() === 'white';
+  return (
+    color === '#ffffff' ||
+    color === '#fff' ||
+    color === 'white' ||
+    color.toLowerCase() === '#ffffff' ||
+    color.toLowerCase() === '#fff' ||
+    color.toLowerCase() === 'white'
+  );
 };
 
 // Создание стилей для точек
@@ -16,7 +24,7 @@ export const createPointStyle = (properties: any, color: string): Style => {
   const pointType = properties.type || properties.category || 'default';
   const isWhite = isWhiteOrLight(color);
   let imageStyle;
-  
+
   if (pointType === 'landmark' || pointType === 'important') {
     // Звезда для важных точек
     imageStyle = new RegularShape({
@@ -53,7 +61,7 @@ export const createPointStyle = (properties: any, color: string): Style => {
       }),
     });
   }
-  
+
   return new Style({ image: imageStyle });
 };
 
@@ -61,13 +69,13 @@ export const createPointStyle = (properties: any, color: string): Style => {
 export const createLineStyle = (properties: any, color: string): Style => {
   const lineType = properties.type || properties.category || 'default';
   let lineDash;
-  
+
   if (lineType === 'route' || lineType === 'path') {
     lineDash = [10, 5]; // Пунктирная линия для маршрутов
   } else if (lineType === 'border' || lineType === 'boundary') {
     lineDash = [15, 5, 5, 5]; // Двойная пунктирная линия для границ
   }
-  
+
   return new Style({
     stroke: new Stroke({
       color,
@@ -85,7 +93,7 @@ export const createPolygonStyle = (properties: any, color: string): Style => {
   const isWhite = isWhiteOrLight(color);
   let fillOpacity = '80'; // 50% прозрачность по умолчанию
   let strokeWidth = 3;
-  
+
   if (polygonType === 'important' || polygonType === 'highlight') {
     fillOpacity = '60'; // Менее прозрачный для важных областей
     strokeWidth = 4;
@@ -93,7 +101,7 @@ export const createPolygonStyle = (properties: any, color: string): Style => {
     fillOpacity = '40'; // Более прозрачный для зон
     strokeWidth = 2;
   }
-  
+
   return new Style({
     fill: new Fill({
       color: `${color}${fillOpacity}`,
@@ -113,10 +121,13 @@ export const createGeometryStyle = (feature: any): Style => {
   const color = properties.color || APP_CONFIG.DEFAULT_COLOR;
   const geometry = feature.getGeometry();
   const geometryType = geometry?.getType();
-  
+
   if (geometryType === 'Point') {
     return createPointStyle(properties, color);
-  } else if (geometryType === 'LineString' || geometryType === 'MultiLineString') {
+  } else if (
+    geometryType === 'LineString' ||
+    geometryType === 'MultiLineString'
+  ) {
     return createLineStyle(properties, color);
   } else {
     return createPolygonStyle(properties, color);
@@ -124,11 +135,14 @@ export const createGeometryStyle = (feature: any): Style => {
 };
 
 // Создание hover стилей для точек
-export const createPointHoverStyle = (properties: any, color: string): Style => {
+export const createPointHoverStyle = (
+  properties: any,
+  color: string
+): Style => {
   const pointType = properties.type || properties.category || 'default';
   const isWhite = isWhiteOrLight(color);
   let imageStyle;
-  
+
   if (pointType === 'landmark' || pointType === 'important') {
     // Увеличенная звезда для hover
     imageStyle = new RegularShape({
@@ -165,7 +179,7 @@ export const createPointHoverStyle = (properties: any, color: string): Style => 
       }),
     });
   }
-  
+
   return new Style({ image: imageStyle });
 };
 
@@ -182,9 +196,12 @@ export const createLineHoverStyle = (properties: any, color: string): Style => {
 };
 
 // Создание hover стилей для полигонов
-export const createPolygonHoverStyle = (properties: any, color: string): Style => {
+export const createPolygonHoverStyle = (
+  properties: any,
+  color: string
+): Style => {
   const isWhite = isWhiteOrLight(color);
-  
+
   return new Style({
     fill: new Fill({
       color: `${color}60`, // Менее прозрачный при hover
@@ -204,10 +221,13 @@ export const createHoverStyle = (feature: any): Style => {
   const color = properties.color || APP_CONFIG.DEFAULT_COLOR;
   const geometry = feature.getGeometry();
   const geometryType = geometry?.getType();
-  
+
   if (geometryType === 'Point') {
     return createPointHoverStyle(properties, color);
-  } else if (geometryType === 'LineString' || geometryType === 'MultiLineString') {
+  } else if (
+    geometryType === 'LineString' ||
+    geometryType === 'MultiLineString'
+  ) {
     return createLineHoverStyle(properties, color);
   } else {
     return createPolygonHoverStyle(properties, color);

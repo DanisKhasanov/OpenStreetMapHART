@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { SnackbarProvider } from "notistack";
-import Map from "./components/Map";
-import FileUpload from "./components/FileUpload";
-import FeatureModal from "./components/FeatureModal";
-import { GeoData } from "./types/geo";
-import "./styles/App.css";
+import { useState } from 'react';
+import { SnackbarProvider } from 'notistack';
+import Map from './components/Map';
+import FileUpload from './components/FileUpload';
+import FeatureModal from './components/FeatureModal';
+import { GeoData } from './types/geo';
+import './styles/App.css';
 
 const App = () => {
   const [uploadedFeatures, setUploadedFeatures] = useState<GeoData[]>([]);

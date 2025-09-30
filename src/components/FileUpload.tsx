@@ -1,10 +1,10 @@
-import { useRef, useState } from "react";
-import { FileUploadProps, GeoData } from "../types/geo";
-import { useCustomSnackbar } from "../hooks/useCustomSnackbar";
-import { APP_CONFIG, FILE_VALIDATION_RULES } from "../utils/constants";
-import { validateGeoData, isSupportedFormat } from "../utils/validationUtils";
-import { parseKMZ, parseKMLWithOpenLayers } from "../utils/fileParsers";
-import styles from "../styles/FileUpload.module.css";
+import { useRef, useState } from 'react';
+import { FileUploadProps, GeoData } from '../types/geo';
+import { useCustomSnackbar } from '../hooks/useCustomSnackbar';
+import { APP_CONFIG, FILE_VALIDATION_RULES } from '../utils/constants';
+import { validateGeoData, isSupportedFormat } from '../utils/validationUtils';
+import { parseKMZ, parseKMLWithOpenLayers } from '../utils/fileParsers';
+import styles from '../styles/FileUpload.module.css';
 
 const FileUpload = ({ onFileUpload }: FileUploadProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -53,19 +53,24 @@ const FileUpload = ({ onFileUpload }: FileUploadProps) => {
 
         // Проверяем поддерживаемый формат
         if (!isSupportedFormat(file.name)) {
-          showSnackbar(FILE_VALIDATION_RULES.ERROR_MESSAGES.UNSUPPORTED_FORMAT, { variant: "error" });
+          showSnackbar(
+            FILE_VALIDATION_RULES.ERROR_MESSAGES.UNSUPPORTED_FORMAT,
+            { variant: 'error' }
+          );
           return;
         }
 
         // Определяем тип файла и парсим соответственно
-        if (file.name.endsWith(".json") || file.name.endsWith(".geojson")) {
+        if (file.name.endsWith('.json') || file.name.endsWith('.geojson')) {
           geoData = JSON.parse(content);
-        } else if (file.name.endsWith(".kml")) {
+        } else if (file.name.endsWith('.kml')) {
           geoData = parseKMLWithOpenLayers(content);
-        } else if (file.name.endsWith(".kmz")) {
+        } else if (file.name.endsWith('.kmz')) {
           geoData = await parseKMZ(file);
         } else {
-          throw new Error(FILE_VALIDATION_RULES.ERROR_MESSAGES.UNSUPPORTED_FORMAT);
+          throw new Error(
+            FILE_VALIDATION_RULES.ERROR_MESSAGES.UNSUPPORTED_FORMAT
+          );
         }
 
         // Валидация GeoJSON структуры
@@ -75,19 +80,19 @@ const FileUpload = ({ onFileUpload }: FileUploadProps) => {
 
         // Показываем успешное уведомление
         const featureCount =
-          geoData.type === "FeatureCollection"
+          geoData.type === 'FeatureCollection'
             ? (geoData as any).features?.length || 0
             : 1;
         showSnackbar(
           `Файл успешно загружен! Найдено объектов: ${featureCount}`,
-          { variant: "success" }
+          { variant: 'success' }
         );
       } catch (error) {
         showSnackbar(
           `Ошибка при чтении файла: ${
-            error instanceof Error ? error.message : "Неизвестная ошибка"
+            error instanceof Error ? error.message : 'Неизвестная ошибка'
           }`,
-          { variant: "error" }
+          { variant: 'error' }
         );
       }
     };
@@ -95,11 +100,10 @@ const FileUpload = ({ onFileUpload }: FileUploadProps) => {
     reader.readAsText(file);
   };
 
-
   return (
     <div
       className={`${styles.uploadContainer} ${
-        isDragOver ? styles.dragOver : ""
+        isDragOver ? styles.dragOver : ''
       }`}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
@@ -107,15 +111,15 @@ const FileUpload = ({ onFileUpload }: FileUploadProps) => {
     >
       <input
         ref={fileInputRef}
-        type="file"
+        type='file'
         accept={APP_CONFIG.SUPPORTED_FORMATS.join(',')}
         onChange={handleFileChange}
         className={styles.fileInput}
       />
       <div className={styles.helpText}>
         {isDragOver
-          ? "Отпустите файл для загрузки"
-          : "Поддерживаемые форматы: JSON, GeoJSON, KML, KMZ"}
+          ? 'Отпустите файл для загрузки'
+          : 'Поддерживаемые форматы: JSON, GeoJSON, KML, KMZ'}
       </div>
     </div>
   );
