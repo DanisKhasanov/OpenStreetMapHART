@@ -3,3 +3,162 @@
   height: 100vh;
   position: relative;
 }
+
+/* Кнопки управления масштабом */
+.zoomControls {
+  position: absolute;
+  top: 40%;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.zoomButton {
+  width: 40px;
+  height: 40px;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: #374151;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.zoomButton:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+  color: #1f2937;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.zoomButton:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  background: #f3f4f6;
+}
+
+.zoomButton:disabled {
+  background: #f9fafb;
+  color: #9ca3af;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.zoomButton:disabled:hover {
+  transform: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: #f9fafb;
+}
+
+/* Стили для иконок кнопок */
+.zoomInIcon::before {
+  content: "+";
+  font-size: 20px;
+  line-height: 1;
+}
+
+.zoomOutIcon::before {
+  content: "−";
+  font-size: 20px;
+  line-height: 1;
+}
+
+.resetZoomIcon::before {
+  content: "⌂";
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* Дополнительные стили для кнопки сброса */
+.resetZoomButton {
+  background: #3b82f6;
+  color: #ffffff;
+  border-color: #2563eb;
+}
+
+.resetZoomButton:hover {
+  background: #2563eb;
+  border-color: #1d4ed8;
+  color: #ffffff;
+}
+
+.resetZoomButton:active {
+  background: #1d4ed8;
+}
+
+/* Стили для группы кнопок с разделителем */
+.zoomControlsGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.zoomControlsGroup + .zoomControlsGroup {
+  margin-top: 8px;
+  position: relative;
+}
+
+.zoomControlsGroup + .zoomControlsGroup::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 1px;
+  background: #d1d5db;
+}
+
+/* Анимация появления кнопок */
+.zoomControls {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  .zoomControls {
+    top: 40%;
+    right: 15px;
+  }
+
+  .zoomButton {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+}
+
+/* Стили для очень маленьких экранов */
+@media (max-width: 480px) {
+  .zoomControls {
+    top: 40%;
+    right: 10px;
+  }
+
+  .zoomButton {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+}
