@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/OpenStreetMapHART/static/css/main.0880e080.css",
+    "main.js": "/OpenStreetMapHART/static/js/main.2c67e492.js",
+    "index.html": "/OpenStreetMapHART/index.html",
+    "main.0880e080.css.map": "/OpenStreetMapHART/static/css/main.0880e080.css.map",
+    "main.2c67e492.js.map": "/OpenStreetMapHART/static/js/main.2c67e492.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0880e080.css",
+    "static/js/main.2c67e492.js"
+  ]
+}
